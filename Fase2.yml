@@ -39,6 +39,8 @@
            target=/var/www/dbdrupal.sql
     - name: activar el modulo rewrite para soporte de url limpios
       command: a2enmod rewrite
+    - name: Instala las libreras GD para php
+      apt: name=php5-gd state=installed
     - name: reiniciar apache
       service: name=apache2 state=restarted
 
