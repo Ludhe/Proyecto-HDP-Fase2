@@ -6,16 +6,16 @@
    tasks:
     - name: actualizando repositorios
       command: apt-get update
-    - name: instalando apache
-      apt: name=apache2  state=installed
-    - name: instalando php
-      apt: name=php5 state=installed
-    - name: instalando mysql
-      apt: name=mysql-server state=installed
-    - name: instalando complemento de php
-      apt: name=php5-mysql
-    - name: instala python-mysqldb
-      apt: name=python-mysqldb state=installed
+    - name: Instalación de LAMP
+      action: apt pkg={{ item }} state=installed
+      with_items:
+       - apache2
+       - mysql-server
+       - php5
+       - php5_mysql
+       - php5-gd
+       - python-mysqldb
+       - git
     - name: crea la base de datos de drupal
       mysql_db: name=dpdatabase state=present
     - name: crea el usuario en la base de datos
@@ -24,8 +24,6 @@
          password: diauesfmocc
          priv: 'dpdatabase.*:ALL,GRANT'
          state: present
-    - name: Instalando git
-      apt: name=git state=installed
     - name: borra el contenido de/var/www para usar el de git hub
       command: rm -rf /var/www
     - name: Clona el repositorio de Git hub
@@ -39,8 +37,8 @@
            target=/var/www/dbdrupal.sql
     - name: activar el modulo rewrite para soporte de url limpios
       command: a2enmod rewrite
-    - name: Instala las libreras GD para php
-      apt: name=php5-gd state=installed
+    - name: Cambia los permisos de la carpeta www
+      command: chown www-data:www-data /var/www/* -R
     - name: reiniciar apache
       service: name=apache2 state=restarted
 
