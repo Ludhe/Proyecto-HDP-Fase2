@@ -37,8 +37,8 @@
            target=/var/www/dbdrupal.sql
     - name: activar el modulo rewrite para soporte de url limpios
       command: a2enmod rewrite
-    - name: Cambia los permisos de la carpeta www
-      command: sudo chown www-data:www-data /var/www/* -R
+    - name: Elimina los archivos que no se van a utilizar
+      command: rm /var/www/dbdrupal.sql /var/www/apache2.conf
     - name: reiniciar apache
       service: name=apache2 state=restarted
 
