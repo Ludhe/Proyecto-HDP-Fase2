@@ -12,7 +12,7 @@
        - apache2
        - mysql-server
        - php5
-       - php5_mysql
+       - php5-mysql
        - php5-gd
        - python-mysqldb
        - git
