@@ -10,8 +10,6 @@ config.vm.provision "ansible", run: "always" do |ansible|
 ansible.playbook = "Fase2.yml"
 end
 
-config.vm.network :public_network, :bridge=>"wlan0"
-
 
   # All Vagrant configuration is done here. The most common configuration
   # options are documented and commented below. For a complete reference,
